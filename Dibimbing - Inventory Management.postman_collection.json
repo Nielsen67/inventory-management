@@ -1,0 +1,791 @@
+{
+	"info": {
+		"_postman_id": "fb483290-2633-4465-a13b-4a96c7a4b7d5",
+		"name": "Dibimbing - Inventory Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37120004"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Boots of Titanium\",\r\n    \"description\": \"Titanium Based Armor Part\",\r\n    \"price\": 32500000,\r\n    \"category\":\"Armor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"product"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Crown of Wisdowm\",\r\n    \"description\": \"Powerful Headgear from Ancient King\",\r\n    \"price\": 60000000,\r\n    \"category\":\"Armor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/product",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"product"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:09:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "263"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product is successfully created\",\n    \"data\": {\n        \"id\": 5,\n        \"name\": \"Crown of Wisdowm\",\n        \"description\": \"Powerful Headgear from Ancient King\",\n        \"price\": 60000000,\n        \"category\": \"Armor\",\n        \"createdAt\": \"2025-02-09T09:09:33.987+07:00\",\n        \"updatedAt\": \"2025-02-09T09:09:33.987+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Potion of Burst\",\r\n    \"description\": \"Increase All of Attacks\",\r\n    \"price\": 14000,\r\n    \"category\":\"Potion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Spear of Light\",\r\n    \"description\": \"Powerful Spear with Light Magic\",\r\n    \"price\": 120000000,\r\n    \"category\":\"Weapon\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:09:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "259"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product is successfully created\",\n    \"data\": {\n        \"id\": 4,\n        \"name\": \"Spear of Light\",\n        \"description\": \"Powerful Spear with Light Magic\",\n        \"price\": 120000000,\n        \"category\": \"Weapon\",\n        \"createdAt\": \"2025-02-09T09:01:37.512+07:00\",\n        \"updatedAt\": \"2025-02-09T09:09:47.377+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:44:51 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:49:58 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "866"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Potion of Greatness\",\n            \"description\": \"Consuming this potion gains you all buffs\",\n            \"price\": 500000,\n            \"category\": \"Drink\",\n            \"createdAt\": \"2025-02-09T08:26:49.515+07:00\",\n            \"updatedAt\": \"2025-02-09T08:26:49.515+07:00\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Potion of Levitation\",\n            \"description\": \"Consuming this potion gains you ability to flight\",\n            \"price\": 100000,\n            \"category\": \"Drink\",\n            \"createdAt\": \"2025-02-09T08:50:59.295+07:00\",\n            \"updatedAt\": \"2025-02-09T08:50:59.295+07:00\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Spear of Light\",\n            \"description\": \"Powerful Spear with Light Magic\",\n            \"price\": 120000000,\n            \"category\": \"Weapon\",\n            \"createdAt\": \"2025-02-09T09:01:37.512+07:00\",\n            \"updatedAt\": \"2025-02-09T09:09:47.377+07:00\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Trouser of Titanium\",\n            \"description\": \"Titanium Based Armor Part\",\n            \"price\": 40000000,\n            \"category\": \"Armor\",\n            \"createdAt\": \"2025-02-09T09:49:38.511+07:00\",\n            \"updatedAt\": \"2025-02-09T09:49:38.511+07:00\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Product with Params",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products?id=7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7"
+								},
+								{
+									"key": "category",
+									"value": "Potion",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Product with Params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products?id=1&category=Potion",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "category",
+											"value": "Potion"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:58:12 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "229"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Potion of Greatness\",\n            \"description\": \"Consuming this potion gains you all buffs\",\n            \"price\": 500000,\n            \"category\": \"Potion\",\n            \"createdAt\": \"2025-02-09T08:26:49.515+07:00\",\n            \"updatedAt\": \"2025-02-09T08:26:49.515+07:00\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stock\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/inventories/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"inventories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Spear of Light\",\r\n    \"description\": \"Powerful Spear with Light Magic\",\r\n    \"price\": 120000000,\r\n    \"category\":\"Weapon\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:09:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "259"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product is successfully created\",\n    \"data\": {\n        \"id\": 4,\n        \"name\": \"Spear of Light\",\n        \"description\": \"Powerful Spear with Light Magic\",\n        \"price\": 120000000,\n        \"category\": \"Weapon\",\n        \"createdAt\": \"2025-02-09T09:01:37.512+07:00\",\n        \"updatedAt\": \"2025-02-09T09:09:47.377+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Inventory with Params Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/inventories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"inventories"
+							],
+							"query": [
+								{
+									"key": "inventoryId",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "productId",
+									"value": "7",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Product with Params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/products?id=1&category=Potion",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "category",
+											"value": "Potion"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 02:58:12 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "229"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Potion of Greatness\",\n            \"description\": \"Consuming this potion gains you all buffs\",\n            \"price\": 500000,\n            \"category\": \"Potion\",\n            \"createdAt\": \"2025-02-09T08:26:49.515+07:00\",\n            \"updatedAt\": \"2025-02-09T08:26:49.515+07:00\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get Inventory with Params Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/inventories?inventoryId=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"inventories"
+									],
+									"query": [
+										{
+											"key": "inventoryId",
+											"value": "3"
+										},
+										{
+											"key": "productId",
+											"value": "7",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 03:16:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 3,\n            \"stock\": 15,\n            \"location\": \"Cawang\",\n            \"productId\": 7\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerName\": \"Nielsen\",\r\n  \"shippingAddress\": \"Tanjung Duren\",\r\n  \"orderDetails\": [\r\n    {\r\n      \"productId\": 1,\r\n      \"qty\": 2\r\n    },\r\n    {\r\n      \"productId\": 7,\r\n      \"qty\": 2\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"customerName\": \"Nielsen\",\r\n  \"shippingAddress\": \"Tanjung Duren\",\r\n  \"orderDetails\": [\r\n    {\r\n      \"productId\": 1,\r\n      \"qty\": 2\r\n    },\r\n    {\r\n      \"productId\": 7,\r\n      \"qty\": 2\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/order",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 04:36:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"date\": \"2025-02-09T11:36:55.7174707+07:00\",\n    \"customerName\": \"Nielsen\",\n    \"shippingAddress\": \"Tanjung Duren\",\n    \"total\": 81000000,\n    \"orderDetails\": [\n        {\n            \"productId\": 1,\n            \"qty\": 2,\n            \"priceDetail\": 1000000\n        },\n        {\n            \"productId\": 7,\n            \"qty\": 2,\n            \"priceDetail\": 80000000\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Order by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/orders/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Order by Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/orders/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"orders",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 05:02:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "233"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"date\": \"2025-02-09T11:36:55.717+07:00\",\n    \"customerName\": \"Nielsen\",\n    \"shippingAddress\": \"Tanjung Duren\",\n    \"total\": 81000000,\n    \"orderDetails\": [\n        {\n            \"productId\": 1,\n            \"qty\": 2,\n            \"priceDetail\": 1000000\n        },\n        {\n            \"productId\": 7,\n            \"qty\": 2,\n            \"priceDetail\": 80000000\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
