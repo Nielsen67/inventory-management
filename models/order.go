@@ -2,15 +2,8 @@ package models
 
 import "time"
 
-type OrderDetail struct {
-	ProductId   uint `gorm:"primaryKey"`
-	OrderId     uint `gorm:"primaryKey"`
-	Qty         uint `json:"qty"`
-	PriceDetail uint `json:"priceDetail"`
-}
-
 type Order struct {
-	ID              uint          `gorm:"primarykey"`
+	ID              uint          `gorm:"primarykey;autoIncrement"`
 	Date            time.Time     `json:"date"`
 	CustomerName    string        `json:"customerName"`
 	ShippingAddress string        `json:"shippingAddress"`
@@ -18,10 +11,17 @@ type Order struct {
 	OrderDetails    []OrderDetail `gorm:"foreignKey:OrderId"`
 }
 
+type OrderDetail struct {
+	OrderId     uint `gorm:"primaryKey"`
+	ProductId   uint `gorm:"primaryKey"`
+	Qty         uint `json:"qty"`
+	PriceDetail uint `json:"priceDetail"`
+}
+
 type CreateOrderRequest struct {
-	CustomerName       string               `json:"customerName"`
-	ShippingAddress    string               `json:"shippingAddress"`
-	OrderDetailRequest []OrderDetailRequest `json:"orderDetails" binding:"required,dive"`
+	CustomerName    string               `json:"customerName"`
+	ShippingAddress string               `json:"shippingAddress"`
+	OrderDetails    []OrderDetailRequest `json:"orderDetails" binding:"required,dive"`
 }
 
 type OrderDetailRequest struct {
@@ -31,6 +31,7 @@ type OrderDetailRequest struct {
 
 type OrderResponse struct {
 	ID                  uint                  `json:"id"`
+	Date                time.Time             `json:"date"`
 	CustomerName        string                `json:"customerName"`
 	ShippingAddress     string                `json:"shippingAddress"`
 	Total               uint                  `json:"total"`
@@ -38,6 +39,7 @@ type OrderResponse struct {
 }
 
 type OrderDetailResponse struct {
-	ProductId uint `json:"productId"`
-	Qty       uint `json:"qty"`
+	ProductId   uint `json:"productId"`
+	Qty         uint `json:"qty"`
+	PriceDetail uint `json:"priceDetail"`
 }

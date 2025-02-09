@@ -18,23 +18,29 @@ type Product struct {
 
 type CreateProductRequest struct {
 	Name        string `json:"name" binding:"required"`
-	Description string `json:"content"`
-	Price       uint   `json:"description" binding:"required"`
+	Description string `json:"description"`
+	Price       uint   `json:"price" binding:"required"`
 	Category    string `json:"category" binding:"required"`
 }
 
 type UpdateProductRequest struct {
-	Name        string `json:"name" binding:"omiempty"`
-	Description string `json:"description" binding:"omiempty"`
-	Price       uint   `json:"price" binding:"omiempty"`
-	Category    string `json:"category" binding:"omiempty"`
+	Name        string `json:"name" binding:"omitempty"`
+	Description string `json:"description" binding:"omitempty"`
+	Price       uint   `json:"price" binding:"omitempty"`
+	Category    string `json:"category" binding:"omitempty"`
 }
 
 type ProductResponse struct {
+	Message string              `json:"message"`
+	Data    ProductDataResponse `json:"data"`
+}
+
+type ProductDataResponse struct {
 	ID          uint      `json:"id"`
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
 	Price       uint      `json:"price"`
 	Category    string    `json:"category"`
 	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }

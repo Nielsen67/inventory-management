@@ -23,6 +23,12 @@ func (pc *ProductController) CreateProduct(c *gin.Context) {
 		return
 	}
 
+	var existingProduct models.Product
+	if err := pc.DB.Where("name = ?", req.Name).First(&existingProduct).Error; err == nil {
+		c.JSON(400, gin.H{"error": "Product name is already used"})
+		return
+	}
+
 	product := models.Product{
 		Name:        req.Name,
 		Description: req.Description,
@@ -39,12 +45,27 @@ func (pc *ProductController) CreateProduct(c *gin.Context) {
 
 	tx.Commit()
 
-	if err := pc.DB.Preload("Product").First(&product).Error; err != nil {
+	productResp := models.ProductDataResponse{
+		ID:          product.ID,
+		Name:        product.Name,
+		Description: product.Description,
+		Price:       product.Price,
+		Category:    product.Category,
+		CreatedAt:   product.CreatedAt,
+		UpdatedAt:   product.UpdatedAt,
+	}
+
+	resp := models.ProductResponse{
+		Message: "Product is successfully created",
+		Data:    productResp,
+	}
+
+	if err := pc.DB.First(&product).Error; err != nil {
 		c.JSON(400, gin.H{"error": "Error loading product data"})
 		return
 	}
 
-	c.JSON(201, gin.H{"message": "Product is successfully created", "data": product})
+	c.JSON(201, resp)
 
 }
 
@@ -55,9 +76,14 @@ func (pc *ProductController) UpdateProduct(c *gin.Context) {
 	}
 
 	var product models.Product
-	// Check if post exists and belongs to user
+
 	if err := pc.DB.Where("id = ?", c.Param("id")).First(&product).Error; err != nil {
 		c.JSON(404, gin.H{"error": "Product is not exists"})
+		return
+	}
+
+	if err := pc.DB.Where("name = ?", req.Name).First(&product).Error; err == nil {
+		c.JSON(400, gin.H{"error": "Product name is already used"})
 		return
 	}
 
@@ -69,7 +95,7 @@ func (pc *ProductController) UpdateProduct(c *gin.Context) {
 	if req.Description != "" {
 		product.Description = req.Description
 	}
-	if req.Price != 0 {
+	if req.Price > 0 {
 		product.Price = req.Price
 	}
 	if req.Category != "" {
@@ -83,11 +109,28 @@ func (pc *ProductController) UpdateProduct(c *gin.Context) {
 	}
 
 	tx.Commit()
-	if err := pc.DB.Preload("Product").First(&product).Error; err != nil {
+
+	if err := pc.DB.First(&product).Error; err != nil {
 		c.JSON(400, gin.H{"error": "Error loading product data"})
 		return
 	}
-	c.JSON(200, gin.H{"message": "Product is successfully updated"})
+
+	productResp := models.ProductDataResponse{
+		ID:          product.ID,
+		Name:        product.Name,
+		Description: product.Description,
+		Price:       product.Price,
+		Category:    product.Category,
+		CreatedAt:   product.CreatedAt,
+		UpdatedAt:   product.UpdatedAt,
+	}
+
+	resp := models.ProductResponse{
+		Message: "Product is successfully created",
+		Data:    productResp,
+	}
+
+	c.JSON(200, resp)
 
 }
 
@@ -101,7 +144,7 @@ func (pc *ProductController) DeleteProduct(c *gin.Context) {
 
 	tx := pc.DB.Begin()
 
-	if err := tx.Model(&product).Association("Inventory").Clear(); err != nil {
+	if err := tx.Model(&product).Association("Inventories").Clear(); err != nil {
 		tx.Rollback()
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
@@ -122,17 +165,43 @@ func (pc *ProductController) DeleteProduct(c *gin.Context) {
 func (pc *ProductController) GetProducts(c *gin.Context) {
 	var products []models.Product
 
-	response := make([]models.ProductResponse, len(products))
+	id := c.Query("id")
+	category := c.Query("category")
+
+	if id != "" && category != "" {
+		if err := pc.DB.Where("id = ? AND category = ?", id, category).Find(&products).Error; err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+	} else if id != "" {
+		if err := pc.DB.Where("id = ?", id).Find(&products).Error; err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+	} else if category != "" {
+		if err := pc.DB.Where("category = ?", category).Find(&products).Error; err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+	} else {
+		if err := pc.DB.Find(&products).Error; err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+	}
+
+	resp := make([]models.ProductDataResponse, len(products))
 	for i, product := range products {
-		response[i] = models.ProductResponse{
+		resp[i] = models.ProductDataResponse{
 			ID:          product.ID,
 			Name:        product.Name,
 			Description: product.Description,
 			Price:       product.Price,
 			Category:    product.Category,
 			CreatedAt:   product.CreatedAt,
+			UpdatedAt:   product.UpdatedAt,
 		}
 	}
 
-	c.JSON(200, gin.H{"data": response})
+	c.JSON(200, gin.H{"data": resp})
 }
