@@ -8,12 +8,21 @@ import (
 
 type Product struct {
 	gorm.Model
-	Name         string        `json:"name" gorm:"unique"`
-	Description  string        `json:"description"`
-	Price        uint          `json:"price"`
-	Category     string        `json:"category"`
-	Inventories  []Inventory   `gorm:"foreignKey:ProductId"`
-	OrderDetails []OrderDetail `gorm:"foreignKey:ProductId"`
+	Name          string         `json:"name" gorm:"unique"`
+	Description   string         `json:"description"`
+	Price         uint           `json:"price"`
+	Category      string         `json:"category"`
+	Inventories   []Inventory    `gorm:"foreignKey:ProductId"`
+	OrderDetails  []OrderDetail  `gorm:"foreignKey:ProductId"`
+	ProductImages []ProductImage `gorm:"foreignKey:ProductId"`
+}
+
+type ProductImage struct {
+	ID         uint      `gorm:"primarykey;autoIncrement"`
+	ProductId  uint      `json:"productId"`
+	ImageUrl   string    `json:"imageUrl"`
+	FileName   string    `json:"fileName"`
+	UploadedAt time.Time `json:"uploadAt"`
 }
 
 type CreateProductRequest struct {

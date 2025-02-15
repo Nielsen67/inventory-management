@@ -19,7 +19,7 @@ func main() {
 	r := gin.Default()
 	db := config.ConnectDatabase()
 
-	db.AutoMigrate(&models.Product{}, &models.Inventory{}, &models.Order{}, &models.OrderDetail{})
+	db.AutoMigrate(&models.Product{}, &models.Inventory{}, &models.Order{}, &models.OrderDetail{}, &models.ProductImage{})
 
 	productController := controllers.NewProductController(db)
 	inventoryController := controllers.NewInventoryController(db)
@@ -35,6 +35,9 @@ func main() {
 			version.GET("/products", productController.GetProducts)
 			version.PUT("/products/:id", productController.UpdateProduct)
 			version.DELETE("/products/:id", productController.DeleteProduct)
+			version.POST("/products/:id/image", productController.UploadProductImage)
+			version.GET("/products/:id/images", productController.DownloadProductImages)
+			version.GET("/products/image", productController.DownloadProductImage)
 
 			/*
 				INVENTORY ROUTES
